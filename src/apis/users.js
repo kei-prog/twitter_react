@@ -6,6 +6,13 @@ export const postUserRegistration = async (userData) => {
     const response = await axios.post(USERS_REGISTRATIONS, userData);
     return response.data;
   } catch (e) {
-    console.error(e);
+    const errorMessages =
+      e.response && e.response.data && e.response.data.errors
+        ? e.response.data.errors.full_messages
+        : ["エラーが発生しました。"];
+    return {
+      success: false,
+      errors: errorMessages,
+    };
   }
 };
