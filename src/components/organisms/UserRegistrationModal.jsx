@@ -2,6 +2,7 @@ import { useState } from "react";
 import UserForm from "../molecules/UserForm";
 import { postUserRegistration } from "../../apis/users";
 import CloseButton from "../atoms/button/CloseButton";
+import ErrorMessages from "../atoms/message/ErrrorMessages";
 
 const UserRegistrationModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -16,9 +17,16 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const [errorMessages, setErrorMessages] = useState([]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postUserRegistration(formData);
+    const result = await postUserRegistration(formData);
+    if (!result.success) {
+      setErrorMessages(result.errors);
+    } else {
+      // 成功した場合
+    }
   };
 
   if (!isOpen) return null;
@@ -33,6 +41,7 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
           アカウントを作成
         </h3>
         <div className="mt-2 px-7 py-3">
+          <ErrorMessages messages={errorMessages} />
           <form onSubmit={handleSubmit} className="text-left">
             <UserForm formData={formData} handleChange={handleChange} />
             <button
