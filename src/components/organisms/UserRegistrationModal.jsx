@@ -25,7 +25,7 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
     if (!result.success) {
       setErrorMessages(result.errors);
     } else {
-      // 成功した場合
+      navigate("/index");
     }
   };
 
