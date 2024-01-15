@@ -1,16 +1,16 @@
 import { useState } from "react";
-import UserForm from "../molecules/UserForm";
-import { postUserRegistration } from "../../apis/users";
+import LoginForm from "../molecules/LoginForm";
+import { postUserSignIn } from "../../apis/users";
 import CloseButton from "../atoms/button/CloseButton";
 import ErrorMessages from "../atoms/message/ErrrorMessages";
+import { useNavigate } from "react-router-dom";
 
-const UserRegistrationModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    password_confirmation: "",
-    birthday: "",
   });
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await postUserRegistration(formData);
+    const result = await postUserSignIn(formData);
     if (!result.success) {
       setErrorMessages(result.errors);
     } else {
@@ -37,18 +37,16 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
         <div className="text-left">
           <CloseButton onClick={onClose} />
         </div>
-        <h3 className="text-left text-lg leading-6 text-white">
-          アカウントを作成
-        </h3>
+        <h3 className="text-left text-lg leading-6 text-white">ログイン</h3>
         <div className="mt-2 px-7 py-3">
           <ErrorMessages messages={errorMessages} />
           <form onSubmit={handleSubmit} className="text-left">
-            <UserForm formData={formData} handleChange={handleChange} />
+            <LoginForm formData={formData} handleChange={handleChange} />
             <button
               type="submit"
               className="bg-white text-black w-full py-2 mt-3 rounded-full"
             >
-              登録
+              ログイン
             </button>
           </form>
         </div>
@@ -57,4 +55,4 @@ const UserRegistrationModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default UserRegistrationModal;
+export default LoginModal;
