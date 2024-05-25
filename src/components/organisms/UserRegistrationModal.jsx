@@ -2,7 +2,7 @@ import { useState } from "react";
 import UserForm from "../molecules/UserForm";
 import { postUserRegistration } from "../../apis/users";
 import CloseButton from "../atoms/button/CloseButton";
-import ErrorMessages from "../atoms/message/ErrrorMessages";
+import ErrorMessages from "../atoms/message/ErrorMessages";
 
 const UserRegistrationModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({

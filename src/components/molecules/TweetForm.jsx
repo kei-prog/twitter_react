@@ -2,7 +2,7 @@ import { useState } from "react";
 import twitterText from "twitter-text";
 import { postTweet, postTweetImages } from "../../apis/tweet";
 import TweetPostButton from "../atoms/button/TweetPostButton";
-import ErrorMessages from "../atoms/message/ErrrorMessages";
+import ErrorMessages from "../atoms/message/ErrorMessages";
 import ImageUploadButton from "../atoms/button/ImageUploadButton";
 import ImagePreview from "../atoms/field/ImagePreview";
 import ReactTextareaAutosize from "react-textarea-autosize";

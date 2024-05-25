@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoginForm from "../molecules/LoginForm";
 import { postUserSignIn } from "../../apis/users";
 import CloseButton from "../atoms/button/CloseButton";
-import ErrorMessages from "../atoms/message/ErrrorMessages";
+import ErrorMessages from "../atoms/message/ErrorMessages";
 import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ isOpen, onClose }) => {
