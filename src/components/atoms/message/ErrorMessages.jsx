@@ -1,4 +1,4 @@
-const ErrorMessages = ({ messages }) => {
+const ErrorMessages = ({ messages, className }) => {
   if (!messages || messages.length === 0) return null;
 
   const uniqueMessages = messages.filter((message, index, self) => {
@@ -6,7 +6,7 @@ const ErrorMessages = ({ messages }) => {
   });
 
   return (
-    <div className="text-red-500">
+    <div className={`text-red-500 ${className}`}>
       {uniqueMessages.map((message, index) => (
         <p key={index}>{message}</p>
       ))}

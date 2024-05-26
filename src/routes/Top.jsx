@@ -4,7 +4,7 @@ import TopImage from "../components/atoms/image/TopImage";
 
 const Top = () => {
   return (
-    <div className="md:flex">
+    <div className="items-center h-screen md:flex">
       <div className="w-16 md:w-auto">
         <TopImage />
       </div>
