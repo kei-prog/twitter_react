@@ -1,11 +1,11 @@
-import { useState } from "react";
 import TweetForm from "../components/molecules/TweetForm";
+import TweetItems from "../components/molecules/TweetItems";
 
 const TweetList = () => {
   return (
     <div className="flex-1 max-w-screen-sm">
       <TweetForm />
-      <h2>ツイート一覧画面</h2>
+      <TweetItems />
     </div>
   );
 };
