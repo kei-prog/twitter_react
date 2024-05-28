@@ -73,7 +73,7 @@ const TweetForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="text-right">
+    <form onSubmit={handleSubmit} className="p-4 text-right">
       <ErrorMessages
         messages={errorMessages}
         className="flex items-center justify-center"
