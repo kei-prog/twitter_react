@@ -2,16 +2,14 @@ import { useState } from "react";
 import twitterText from "twitter-text";
 import { postTweet, postTweetImages } from "../../apis/tweet";
 import TweetPostButton from "../atoms/button/TweetPostButton";
-import ErrorMessages from "../atoms/message/ErrorMessages";
 import ImageUploadButton from "../atoms/button/ImageUploadButton";
 import ImagePreview from "../atoms/field/ImagePreview";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
-const TweetForm = () => {
+const TweetForm = ({ setErrorMessages }) => {
   const [tweet, setTweet] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
-  const [errorMessages, setErrorMessages] = useState([]);
   const [isTweetButtonDisabled, setIsTweetButtonDisabled] = useState(true);
 
   const handleImageChange = (e) => {
@@ -74,10 +72,6 @@ const TweetForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 text-right">
-      <ErrorMessages
-        messages={errorMessages}
-        className="flex items-center justify-center"
-      />
       <ReactTextareaAutosize
         className="w-full text-xl focus:border-none focus:outline-none"
         value={tweet}

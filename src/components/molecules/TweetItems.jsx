@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getTweets } from "../../apis/tweet";
 import TweetItem from "../atoms/button/TweetItem";
 
-const TweetItems = () => {
+const TweetItems = ({ setErrorMessages }) => {
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
@@ -25,6 +25,7 @@ const TweetItems = () => {
       setOffset(offset + newItems.length);
     } else {
       setHasMore(false);
+      setErrorMessages(response.errors);
     }
   };
 
