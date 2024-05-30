@@ -5,6 +5,27 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+export const getTweets = async (offset) => {
+  try {
+    const response = await axiosInstance.get(TWEETS, {
+      params: { offset: offset },
+    });
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (e) {
+    const errorMessages =
+      e.response && e.response.data && e.response.data.errors
+        ? e.response.data.errors
+        : ["ツイートの取得に失敗しました。"];
+    return {
+      success: false,
+      errors: errorMessages,
+    };
+  }
+};
+
 export const postTweet = async (tweet) => {
   try {
     const response = await axiosInstance.post(TWEETS, {
