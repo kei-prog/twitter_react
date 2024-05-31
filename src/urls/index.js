@@ -6,3 +6,5 @@ export const USERS_VALIDATE_TOKEN = `${DEFAULT_API_LOCALHOST}/users/validate_tok
 export const TWEETS = `${DEFAULT_API_LOCALHOST}/tweets`;
 export const getTweetImagesUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/images`;
+export const getTweetUrl = (tweet_id) =>
+  `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}`;
