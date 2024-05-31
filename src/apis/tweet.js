@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TWEETS, getTweetImagesUrl } from "../urls/index";
+import { TWEETS, getTweetImagesUrl, getTweetUrl } from "../urls/index";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -10,6 +10,25 @@ export const getTweets = async (offset) => {
     const response = await axiosInstance.get(TWEETS, {
       params: { offset: offset },
     });
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (e) {
+    const errorMessages =
+      e.response && e.response.data && e.response.data.errors
+        ? e.response.data.errors
+        : ["ツイートの取得に失敗しました。"];
+    return {
+      success: false,
+      errors: errorMessages,
+    };
+  }
+};
+
+export const getTweet = async (tweetId) => {
+  try {
+    const response = await axiosInstance.get(getTweetUrl(tweetId));
     return {
       success: true,
       data: response.data,
