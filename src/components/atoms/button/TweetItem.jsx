@@ -17,7 +17,7 @@ const TweetItem = ({ item }) => {
       <div className="font-bold text-left">
         {item.user.name} <TimeAgo dateString={item.created_at} />
       </div>
-      <div className="text-left">{item.body}</div>
+      <div className="text-left break-all">{item.body}</div>
     </div>
   );
 };
