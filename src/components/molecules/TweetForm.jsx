@@ -6,7 +6,7 @@ import ImageUploadButton from "../atoms/button/ImageUploadButton";
 import ImagePreview from "../atoms/field/ImagePreview";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
-const TweetForm = ({ setErrorMessages }) => {
+const TweetForm = ({ setErrorMessages, onAddTweet }) => {
   const [tweet, setTweet] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -49,6 +49,7 @@ const TweetForm = ({ setErrorMessages }) => {
           await postTweetImages(tweetResponse.data.id, images);
         }
 
+        onAddTweet(tweetResponse.data, previews);
         setTweet("");
         setImages([]);
         setPreviews([]);
