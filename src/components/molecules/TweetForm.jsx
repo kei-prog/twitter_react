@@ -72,7 +72,10 @@ const TweetForm = ({ setErrorMessages, onAddTweet }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 text-right">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 text-right border border-gray-800"
+    >
       <ReactTextareaAutosize
         className="w-full text-xl focus:border-none focus:outline-none"
         value={tweet}
