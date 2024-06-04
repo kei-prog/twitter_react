@@ -2,20 +2,14 @@ import axios from "axios";
 import { USERS_REGISTRATIONS } from "../urls/index";
 import { USERS_SESSIONS } from "../urls/index";
 import { USERS_VALIDATE_TOKEN } from "../urls/index";
+import { handleErrorResponse } from "../components/atoms/message/errorHndler";
 
 export const postUserRegistration = async (userData) => {
   try {
     const response = await axios.post(USERS_REGISTRATIONS, userData);
     return response.data;
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors.full_messages
-        : ["エラーが発生しました。"];
-    return {
-      success: false,
-      errors: errorMessages,
-    };
+    return handleErrorResponse(e, "エラーが発生しました。");
   }
 };
 
@@ -29,15 +23,7 @@ export const postUserSignIn = async (userData) => {
       success: true,
     };
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors
-        : ["ログインに失敗しました。"];
-
-    return {
-      success: false,
-      errors: errorMessages,
-    };
+    return handleErrorResponse(e, "ログインに失敗しました。");
   }
 };
 
@@ -48,10 +34,6 @@ export const validateUserToken = async () => {
     });
     return { success: true };
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors
-        : ["トークンの検証に失敗しました。"];
-    return { success: false, errors: errorMessages };
+    return handleErrorResponse(e, "トークンの検証に失敗しました。");
   }
 };

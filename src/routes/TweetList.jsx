@@ -5,6 +5,12 @@ import TweetItems from "../components/molecules/TweetItems";
 
 const TweetList = () => {
   const [errorMessages, setErrorMessages] = useState([]);
+  const [addTweet, setAddTweet] = useState(null);
+
+  const handleAddTweet = (tweet, previews) => {
+    const newTweet = { ...tweet, images: previews };
+    setAddTweet(newTweet);
+  };
 
   return (
     <div className="flex-1 max-w-screen-sm">
@@ -12,8 +18,11 @@ const TweetList = () => {
         messages={errorMessages}
         className="flex items-center justify-center"
       />
-      <TweetForm setErrorMessages={setErrorMessages} />
-      <TweetItems setErrorMessages={setErrorMessages} />
+      <TweetForm
+        setErrorMessages={setErrorMessages}
+        onAddTweet={handleAddTweet}
+      />
+      <TweetItems setErrorMessages={setErrorMessages} addTweet={addTweet} />
     </div>
   );
 };

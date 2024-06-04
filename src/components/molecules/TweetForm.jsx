@@ -6,7 +6,7 @@ import ImageUploadButton from "../atoms/button/ImageUploadButton";
 import ImagePreview from "../atoms/field/ImagePreview";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
-const TweetForm = ({ setErrorMessages }) => {
+const TweetForm = ({ setErrorMessages, onAddTweet }) => {
   const [tweet, setTweet] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -49,6 +49,7 @@ const TweetForm = ({ setErrorMessages }) => {
           await postTweetImages(tweetResponse.data.id, images);
         }
 
+        onAddTweet(tweetResponse.data, previews);
         setTweet("");
         setImages([]);
         setPreviews([]);
@@ -71,7 +72,10 @@ const TweetForm = ({ setErrorMessages }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 text-right">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 text-right border border-gray-800"
+    >
       <ReactTextareaAutosize
         className="w-full text-xl focus:border-none focus:outline-none"
         value={tweet}

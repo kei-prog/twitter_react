@@ -1,5 +1,6 @@
 import axios from "axios";
-import { TWEETS, getTweetImagesUrl } from "../urls/index";
+import { TWEETS, getTweetImagesUrl, getTweetUrl } from "../urls/index";
+import { handleErrorResponse } from "../components/atoms/message/errorHndler";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -15,14 +16,19 @@ export const getTweets = async (offset) => {
       data: response.data,
     };
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors
-        : ["ツイートの取得に失敗しました。"];
+    return handleErrorResponse(e, "ツイートの取得に失敗しました。");
+  }
+};
+
+export const getTweet = async (tweetId) => {
+  try {
+    const response = await axiosInstance.get(getTweetUrl(tweetId));
     return {
-      success: false,
-      errors: errorMessages,
+      success: true,
+      data: response.data,
     };
+  } catch (e) {
+    return handleErrorResponse(e, "ツイートの取得に失敗しました。");
   }
 };
 
@@ -36,14 +42,7 @@ export const postTweet = async (tweet) => {
       data: response.data,
     };
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors.full_messages
-        : ["ツイートの投稿に失敗しました。"];
-    return {
-      success: false,
-      errors: errorMessages,
-    };
+    return handleErrorResponse(e, "ツイートの投稿に失敗しました。");
   }
 };
 
@@ -65,13 +64,6 @@ export const postTweetImages = async (tweetId, images) => {
       success: true,
     };
   } catch (e) {
-    const errorMessages =
-      e.response && e.response.data && e.response.data.errors
-        ? e.response.data.errors
-        : ["画像のアップロードに失敗しました。"];
-    return {
-      success: false,
-      errors: errorMessages,
-    };
+    return handleErrorResponse(e, "画像のアップロードに失敗しました。");
   }
 };
