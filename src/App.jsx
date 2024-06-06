@@ -5,6 +5,7 @@ import NoMatch from "./routes/NoMatch";
 import TweetList from "./routes/TweetList";
 import TweetDetailPage from "./routes/TweetDetailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import ProfilePage from "./routes/ProfilePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/index" element={<TweetList />} />
           <Route path="/tweet/:id" element={<TweetDetailPage />} />
+          <Route path="/users/:id" element={<ProfilePage />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Routes>
