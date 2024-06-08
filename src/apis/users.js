@@ -33,10 +33,10 @@ export const postUserSignIn = async (userData) => {
 
 export const validateUserToken = async () => {
   try {
-    await axios.get(USERS_VALIDATE_TOKEN, {
+    const response = await axios.get(USERS_VALIDATE_TOKEN, {
       withCredentials: true,
     });
-    return { success: true };
+    return { success: true, data: { id: response.data.data.id } };
   } catch (e) {
     return handleErrorResponse(e, "トークンの検証に失敗しました。");
   }

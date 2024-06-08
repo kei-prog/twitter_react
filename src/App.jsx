@@ -6,10 +6,11 @@ import TweetList from "./routes/TweetList";
 import TweetDetailPage from "./routes/TweetDetailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProfilePage from "./routes/ProfilePage";
+import { UserProvider } from "./contexts/UserContext";
 
 function App() {
   return (
-    <>
+    <UserProvider>
       <Routes>
         <Route path="/" element={<Top />} />
         <Route path="/top" element={<Top />} />
@@ -20,7 +21,7 @@ function App() {
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Routes>
-    </>
+    </UserProvider>
   );
 }
 
