@@ -37,6 +37,12 @@ const TweetList = () => {
     setAddTweet(newTweet);
   };
 
+  const handleDeleteTweet = (tweetId) => {
+    const updatedItems = items.filter((item) => item.id !== tweetId);
+    setItems(updatedItems);
+    setOffset(offset - 1);
+  };
+
   useEffect(() => {
     if (addTweet) {
       setItems([addTweet, ...items]);
@@ -58,6 +64,7 @@ const TweetList = () => {
         items={items}
         hasMore={hasMore}
         fetchMoreData={fetchMoreData}
+        onDeleteTweet={handleDeleteTweet}
       />
     </div>
   );
