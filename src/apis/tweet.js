@@ -67,3 +67,14 @@ export const postTweetImages = async (tweetId, images) => {
     return handleErrorResponse(e, "画像のアップロードに失敗しました。");
   }
 };
+
+export const deleteTweet = async (tweetId) => {
+  try {
+    await axiosInstance.delete(getTweetUrl(tweetId));
+    return {
+      success: true,
+    };
+  } catch (e) {
+    return handleErrorResponse(e, "ツイートの削除に失敗しました。");
+  }
+};
