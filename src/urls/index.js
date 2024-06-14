@@ -11,3 +11,5 @@ export const getTweetImagesUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/images`;
 export const getTweetUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}`;
+export const getCommentUrl = (tweet_id) =>
+  `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/comments`;

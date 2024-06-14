@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/UserContext";
 import DropdownMenu from "../field/DropDownMenu";
 import ConfirmationModal from "../field/ConfirmationModal";
+import CommentModal from "../../organisms/CommentModal";
 
 const TweetItem = ({ item, handleDeleteClick }) => {
   const navigate = useNavigate();
@@ -46,6 +47,12 @@ const TweetItem = ({ item, handleDeleteClick }) => {
     setConfirmationMessage(!confirmationMessage);
   };
 
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const handleCommentClick = (e) => {
+    e.stopPropagation();
+    setIsCommentModalOpen(!isCommentModalOpen);
+  };
+
   return (
     <div key={item.id} className="p-4 border border-gray-800">
       <div className="cursor-pointer" onClick={handleClick}>
@@ -81,6 +88,14 @@ const TweetItem = ({ item, handleDeleteClick }) => {
           )}
         </div>
         <div className="text-left break-all">{item.body}</div>
+        <div className="pt-3">
+          <img
+            src={"/src/assets/comment.svg"}
+            alt="comment"
+            className="w-5 h-5"
+            onClick={handleCommentClick}
+          />
+        </div>
       </div>
       {item.images && item.images.length > 0 && (
         <ImagePreview previews={item.images} />
@@ -92,6 +107,13 @@ const TweetItem = ({ item, handleDeleteClick }) => {
             handleConfirmDeleteClick();
             handleDeleteClick(item);
           }}
+        />
+      )}
+      {isCommentModalOpen && (
+        <CommentModal
+          item={item}
+          handleUserClick={handleUserClick}
+          setIsCommentModalOpen={setIsCommentModalOpen}
         />
       )}
     </div>
