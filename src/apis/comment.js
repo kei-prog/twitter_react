@@ -1,6 +1,6 @@
 import axios from "axios";
 import { handleErrorResponse } from "../components/atoms/message/errorHndler";
-import { getCommentUrl } from "../urls";
+import { getCommentUrl, getUserCommentsUrl } from "../urls";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -9,6 +9,20 @@ const axiosInstance = axios.create({
 export const getComments = async (tweetId, offset) => {
   try {
     const response = await axiosInstance.get(getCommentUrl(tweetId, offset), {
+      params: { offset: offset },
+    });
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (e) {
+    return handleErrorResponse(e, "コメントの取得に失敗しました。");
+  }
+};
+
+export const getUserComments = async (userId, offset) => {
+  try {
+    const response = await axiosInstance.get(getUserCommentsUrl(userId), {
       params: { offset: offset },
     });
     return {
