@@ -1,6 +1,10 @@
 import axios from "axios";
 import { handleErrorResponse } from "../components/atoms/message/errorHndler";
-import { getCommentUrl, getUserCommentsUrl } from "../urls";
+import {
+  getCommentDetailUrl,
+  getCommentUrl,
+  getUserCommentsUrl,
+} from "../urls";
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -45,5 +49,17 @@ export const postComment = async (tweetId, comment) => {
     };
   } catch (e) {
     return handleErrorResponse(e, "コメントの投稿に失敗しました。");
+  }
+};
+
+export const deleteComment = async (commentId) => {
+  try {
+    const response = await axiosInstance.delete(getCommentDetailUrl(commentId));
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (e) {
+    return handleErrorResponse(e, "コメントの削除に失敗しました。");
   }
 };
