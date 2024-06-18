@@ -79,6 +79,12 @@ const ProfilePage = () => {
     }
   };
 
+  const onDeleteComment = (commentId) => {
+    const updateItems = commentItems.filter((item) => item.id !== commentId);
+    setCommentItems(updateItems);
+    setOffset(offset - 1);
+  };
+
   return (
     <div className="flex-1 max-w-screen-sm">
       <ErrorMessages
@@ -102,6 +108,7 @@ const ProfilePage = () => {
           items={commentItems}
           hasMore={commentHasMore}
           fetchComments={fetchComments}
+          onDeleteComment={onDeleteComment}
         />
       )}
     </div>
