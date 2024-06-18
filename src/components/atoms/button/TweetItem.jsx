@@ -107,6 +107,7 @@ const TweetItem = ({ item, handleDeleteClick }) => {
             handleConfirmDeleteClick();
             handleDeleteClick(item);
           }}
+          message={"ポストを削除しますか？"}
         />
       )}
       {isCommentModalOpen && (

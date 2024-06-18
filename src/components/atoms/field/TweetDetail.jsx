@@ -108,6 +108,7 @@ const TweetDetail = ({ tweet }) => {
             handleConfirmDeleteClick();
             handleDeleteClick(tweet);
           }}
+          message={"ポストを削除しますか？"}
         />
       )}
     </div>
