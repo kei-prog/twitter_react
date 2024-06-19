@@ -4,6 +4,9 @@ import TweetItems from "../components/molecules/TweetItems";
 import { useParams } from "react-router-dom";
 import UserProfile from "../components/molecules/UserProfile";
 import { getUserProfile } from "../apis/users";
+import ProfileTabs from "../components/molecules/ProfileTabs";
+import CommentItems from "../components/molecules/CommentItems";
+import { getUserComments } from "../apis/comment";
 
 const ProfilePage = () => {
   const [errorMessages, setErrorMessages] = useState([]);
@@ -12,6 +15,10 @@ const ProfilePage = () => {
   const [offset, setOffset] = useState(0);
   const { id } = useParams();
   const [userProfile, setUserProfile] = useState(null);
+  const [activeTab, setActiveTab] = useState("tweets");
+  const [commentItems, setCommentItems] = useState([]);
+  const [commentHasMore, setCommentHasMore] = useState(true);
+  const [commentOffset, setCommentOffset] = useState(0);
 
   const handleUserProfileUpdate = (newUserProfile) => {
     setUserProfile(newUserProfile);
@@ -19,6 +26,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     fetchMoreData();
+  }, []);
+
+  useEffect(() => {
+    fetchComments();
   }, []);
 
   const fetchMoreData = async () => {
@@ -51,6 +62,29 @@ const ProfilePage = () => {
     }
   };
 
+  const fetchComments = async () => {
+    const response = await getUserComments(id, commentOffset);
+
+    if (response.success) {
+      const newItems = response.data;
+      if (newItems.length === 0) {
+        setCommentHasMore(false);
+        return;
+      }
+      setCommentItems([...commentItems, ...newItems]);
+      setCommentOffset(commentOffset + newItems.length);
+    } else {
+      setCommentHasMore(false);
+      setErrorMessages(response.errors);
+    }
+  };
+
+  const onDeleteComment = (commentId) => {
+    const updateItems = commentItems.filter((item) => item.id !== commentId);
+    setCommentItems(updateItems);
+    setOffset(offset - 1);
+  };
+
   return (
     <div className="flex-1 max-w-screen-sm">
       <ErrorMessages
@@ -61,11 +95,22 @@ const ProfilePage = () => {
         userProfile={userProfile}
         handleUserProfileUpdate={handleUserProfileUpdate}
       />
-      <TweetItems
-        items={items}
-        hasMore={hasMore}
-        fetchMoreData={fetchMoreData}
-      />
+      <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "tweets" && (
+        <TweetItems
+          items={items}
+          hasMore={hasMore}
+          fetchMoreData={fetchMoreData}
+        />
+      )}
+      {activeTab === "comments" && (
+        <CommentItems
+          items={commentItems}
+          hasMore={commentHasMore}
+          fetchComments={fetchComments}
+          onDeleteComment={onDeleteComment}
+        />
+      )}
     </div>
   );
 };
