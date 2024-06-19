@@ -17,3 +17,5 @@ export const getUserCommentsUrl = (user_id) =>
   `${DEFAULT_API_LOCALHOST}/users/${user_id}/comments`;
 export const getCommentDetailUrl = (comment_id) =>
   `${DEFAULT_API_LOCALHOST}/comments/${comment_id}`;
+export const getRetweetUrl = (tweet_id) =>
+  `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/toggle_retweet`;
