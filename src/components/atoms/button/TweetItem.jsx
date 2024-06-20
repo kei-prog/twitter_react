@@ -88,13 +88,22 @@ const TweetItem = ({ item, handleDeleteClick }) => {
           )}
         </div>
         <div className="text-left break-all">{item.body}</div>
-        <div className="pt-3">
-          <img
-            src={"/src/assets/comment.svg"}
-            alt="comment"
-            className="w-5 h-5"
-            onClick={handleCommentClick}
-          />
+        <div className="flex">
+          <div className="pt-3">
+            <img
+              src={"/src/assets/comment.svg"}
+              alt="comment"
+              className="w-5 h-5"
+              onClick={handleCommentClick}
+            />
+          </div>
+          <div className="pt-3 ps-3">
+            <img
+              src={"/src/assets/retweet.svg"}
+              alt="retweet"
+              className="w-5 h-5"
+            />
+          </div>
         </div>
       </div>
       {item.images && item.images.length > 0 && (
