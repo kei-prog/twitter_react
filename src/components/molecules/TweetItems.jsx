@@ -30,6 +30,7 @@ const TweetItems = ({ items, hasMore, fetchMoreData, onDeleteTweet }) => {
             key={item.id}
             item={item}
             handleDeleteClick={handleDeleteClick}
+            setErrorMessages={setErrorMessages}
           />
         ))}
       </InfiniteScroll>

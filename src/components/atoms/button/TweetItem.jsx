@@ -6,12 +6,14 @@ import { UserContext } from "../../../contexts/UserContext";
 import DropdownMenu from "../field/DropDownMenu";
 import ConfirmationModal from "../field/ConfirmationModal";
 import CommentModal from "../../organisms/CommentModal";
+import { postRetweet } from "../../../apis/retweet";
 
-const TweetItem = ({ item, handleDeleteClick }) => {
+const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
   const navigate = useNavigate();
   const [dropDownDisabled, setDropDownDisabled] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState(false);
   const { userId } = useContext(UserContext);
+  const [retweetCount, setRetweetCount] = useState(item.retweet_count);
 
   useEffect(() => {
     if (dropDownDisabled) {
@@ -51,6 +53,24 @@ const TweetItem = ({ item, handleDeleteClick }) => {
   const handleCommentClick = (e) => {
     e.stopPropagation();
     setIsCommentModalOpen(!isCommentModalOpen);
+  };
+
+  const handleRetweetClick = async (e) => {
+    e.stopPropagation();
+    try {
+      const retweetResponse = await postRetweet(item.id);
+      if (retweetResponse.success) {
+        if (retweetResponse.status === 201) {
+          setRetweetCount(retweetCount + 1);
+        } else if (retweetResponse.status === 204) {
+          setRetweetCount(retweetCount - 1);
+        }
+      } else {
+        setErrorMessages(retweetResponse.errors);
+      }
+    } catch (error) {
+      setErrorMessages(["リツイートに失敗しました。"]);
+    }
   };
 
   return (
@@ -102,8 +122,10 @@ const TweetItem = ({ item, handleDeleteClick }) => {
               src={"/src/assets/retweet.svg"}
               alt="retweet"
               className="w-5 h-5"
+              onClick={handleRetweetClick}
             />
           </div>
+          <span className="pt-3 ps-1">{retweetCount}</span>
         </div>
       </div>
       {item.images && item.images.length > 0 && (
