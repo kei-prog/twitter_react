@@ -126,6 +126,13 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
             />
           </div>
           <span className="pt-3 ps-1">{retweetCount}</span>
+          <div className="pt-3 ps-3">
+            <img
+              src={"/src/assets/heart.svg"}
+              alt="favorite"
+              className="w-5 h-5"
+            />
+          </div>
         </div>
       </div>
       {item.images && item.images.length > 0 && (
