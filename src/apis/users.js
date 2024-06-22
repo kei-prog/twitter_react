@@ -8,6 +8,10 @@ import {
 } from "../urls/index";
 import { handleErrorResponse } from "../components/atoms/message/errorHndler";
 
+const axiosInstance = axios.create({
+  withCredentials: true,
+});
+
 export const postUserRegistration = async (userData) => {
   try {
     const response = await axios.post(USERS_REGISTRATIONS, userData);
@@ -44,7 +48,7 @@ export const validateUserToken = async () => {
 
 export const getUserProfile = async (user_id, offset) => {
   try {
-    const response = await axios.get(getUserUrl(user_id), {
+    const response = await axiosInstance.get(getUserUrl(user_id), {
       params: { offset: offset },
     });
     return { success: true, data: response.data };
