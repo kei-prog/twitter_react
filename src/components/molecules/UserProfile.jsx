@@ -3,8 +3,13 @@ import UpdateProfileButton from "../atoms/button/UpdateProfileButton";
 import TwitterJoinDate from "../atoms/text/TwitterJoinDate";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
+import FollowButton from "../atoms/button/FollowButton";
 
-const UserProfile = ({ userProfile, handleUserProfileUpdate }) => {
+const UserProfile = ({
+  userProfile,
+  handleUserProfileUpdate,
+  setErrorMessages,
+}) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { userId } = useContext(UserContext);
@@ -47,10 +52,16 @@ const UserProfile = ({ userProfile, handleUserProfileUpdate }) => {
           )}
         </div>
         <div className="flex justify-end p-4">
-          {userId && userId.toString() === id && (
+          {userId && userId.toString() === id ? (
             <UpdateProfileButton
               userProfile={userProfile}
               handleUserProfileUpdate={handleUserProfileUpdate}
+            />
+          ) : (
+            <FollowButton
+              setErrorMessages={setErrorMessages}
+              following={userProfile.following}
+              followUserId={userProfile.id}
             />
           )}
         </div>

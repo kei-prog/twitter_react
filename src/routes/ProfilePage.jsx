@@ -94,6 +94,7 @@ const ProfilePage = () => {
       <UserProfile
         userProfile={userProfile}
         handleUserProfileUpdate={handleUserProfileUpdate}
+        setErrorMessages={setErrorMessages}
       />
       <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "tweets" && (
