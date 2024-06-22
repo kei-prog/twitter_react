@@ -21,3 +21,5 @@ export const getRetweetUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/toggle_retweet`;
 export const getFavoriteUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/toggle_favorite`;
+export const getFollowUrl = (user_id) =>
+  `${DEFAULT_API_LOCALHOST}/users/${user_id}/follows`;
