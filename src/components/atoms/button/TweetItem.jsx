@@ -7,6 +7,7 @@ import DropdownMenu from "../field/DropDownMenu";
 import ConfirmationModal from "../field/ConfirmationModal";
 import CommentModal from "../../organisms/CommentModal";
 import { postRetweet } from "../../../apis/retweet";
+import { postFavorite } from "../../../apis/favorite";
 
 const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
   const [confirmationMessage, setConfirmationMessage] = useState(false);
   const { userId } = useContext(UserContext);
   const [retweetCount, setRetweetCount] = useState(item.retweet_count);
+  const [favoriteCount, setFavoriteCount] = useState(item.favorite_count);
 
   useEffect(() => {
     if (dropDownDisabled) {
@@ -73,6 +75,24 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
     }
   };
 
+  const handleFavoriteClick = async (e) => {
+    e.stopPropagation();
+    try {
+      const favoriteResponse = await postFavorite(item.id);
+      if (favoriteResponse.success) {
+        if (favoriteResponse.status === 201) {
+          setFavoriteCount(favoriteCount + 1);
+        } else if (favoriteResponse.status === 204) {
+          setFavoriteCount(favoriteCount - 1);
+        }
+      } else {
+        setErrorMessages(favoriteResponse.errors);
+      }
+    } catch (error) {
+      setErrorMessages(["リツイートに失敗しました。"]);
+    }
+  };
+
   return (
     <div key={item.id} className="p-4 border border-gray-800">
       <div className="cursor-pointer" onClick={handleClick}>
@@ -117,7 +137,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
               onClick={handleCommentClick}
             />
           </div>
-          <div className="pt-3 ps-3">
+          <div className="pt-3 ps-10">
             <img
               src={"/src/assets/retweet.svg"}
               alt="retweet"
@@ -126,6 +146,15 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
             />
           </div>
           <span className="pt-3 ps-1">{retweetCount}</span>
+          <div className="pt-3 ps-10">
+            <img
+              src={"/src/assets/heart.svg"}
+              alt="favorite"
+              className="w-5 h-5"
+              onClick={handleFavoriteClick}
+            />
+          </div>
+          <span className="pt-3 ps-1">{favoriteCount}</span>
         </div>
       </div>
       {item.images && item.images.length > 0 && (
