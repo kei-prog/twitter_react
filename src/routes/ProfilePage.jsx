@@ -45,6 +45,7 @@ const ProfilePage = () => {
         created_at: response.data.created_at,
         avatar_url: response.data.avatar_url,
         header_url: response.data.header_url,
+        following: response.data.following,
       };
       setUserProfile(userProfileData);
 
@@ -94,6 +95,7 @@ const ProfilePage = () => {
       <UserProfile
         userProfile={userProfile}
         handleUserProfileUpdate={handleUserProfileUpdate}
+        setErrorMessages={setErrorMessages}
       />
       <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "tweets" && (
