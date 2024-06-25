@@ -16,3 +16,14 @@ export const postFollow = async (userId) => {
     return handleErrorResponse(e, "フォローに失敗しました。");
   }
 };
+
+export const deleteFollow = async (useid) => {
+  try {
+    await axiosInstance.delete(getFollowUrl(useid));
+    return {
+      success: true,
+    };
+  } catch (e) {
+    return handleErrorResponse(e, "フォロー解除に失敗しました。");
+  }
+};
