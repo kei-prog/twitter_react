@@ -5,6 +5,7 @@ import TweetDetail from "../components/atoms/field/TweetDetail";
 import ErrorMessages from "../components/atoms/message/ErrorMessages";
 import { getComments } from "../apis/comment";
 import CommentItems from "../components/molecules/CommentItems";
+import SideMenu from "../components/molecules/SideMenu";
 
 const TweetDetailPage = () => {
   const { id } = useParams();
@@ -48,14 +49,17 @@ const TweetDetailPage = () => {
   };
 
   return (
-    <div className="flex-1 max-w-screen-sm">
-      <ErrorMessages messages={errorMessages} />
-      {tweet && <TweetDetail tweet={tweet} />}
-      <CommentItems
-        items={comments}
-        hasMore={hasMore}
-        fetchComments={fetchComments}
-      />
+    <div className="flex flex-1">
+      <SideMenu />
+      <div className="flex-1 max-w-screen-sm">
+        <ErrorMessages messages={errorMessages} />
+        {tweet && <TweetDetail tweet={tweet} />}
+        <CommentItems
+          items={comments}
+          hasMore={hasMore}
+          fetchComments={fetchComments}
+        />
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { getUserProfile } from "../apis/users";
 import ProfileTabs from "../components/molecules/ProfileTabs";
 import CommentItems from "../components/molecules/CommentItems";
 import { getUserComments } from "../apis/comment";
+import SideMenu from "../components/molecules/SideMenu";
 
 const ProfilePage = () => {
   const [errorMessages, setErrorMessages] = useState([]);
@@ -87,32 +88,35 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex-1 max-w-screen-sm">
-      <ErrorMessages
-        messages={errorMessages}
-        className={"flex items-center justify-center"}
-      />
-      <UserProfile
-        userProfile={userProfile}
-        handleUserProfileUpdate={handleUserProfileUpdate}
-        setErrorMessages={setErrorMessages}
-      />
-      <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "tweets" && (
-        <TweetItems
-          items={items}
-          hasMore={hasMore}
-          fetchMoreData={fetchMoreData}
+    <div className="flex flex-1">
+      <SideMenu />
+      <div className="flex-1 max-w-screen-sm">
+        <ErrorMessages
+          messages={errorMessages}
+          className={"flex items-center justify-center"}
         />
-      )}
-      {activeTab === "comments" && (
-        <CommentItems
-          items={commentItems}
-          hasMore={commentHasMore}
-          fetchComments={fetchComments}
-          onDeleteComment={onDeleteComment}
+        <UserProfile
+          userProfile={userProfile}
+          handleUserProfileUpdate={handleUserProfileUpdate}
+          setErrorMessages={setErrorMessages}
         />
-      )}
+        <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        {activeTab === "tweets" && (
+          <TweetItems
+            items={items}
+            hasMore={hasMore}
+            fetchMoreData={fetchMoreData}
+          />
+        )}
+        {activeTab === "comments" && (
+          <CommentItems
+            items={commentItems}
+            hasMore={commentHasMore}
+            fetchComments={fetchComments}
+            onDeleteComment={onDeleteComment}
+          />
+        )}
+      </div>
     </div>
   );
 };

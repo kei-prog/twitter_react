@@ -3,6 +3,7 @@ import ErrorMessages from "../components/atoms/message/ErrorMessages";
 import TweetForm from "../components/molecules/TweetForm";
 import TweetItems from "../components/molecules/TweetItems";
 import { getTweets } from "../apis/tweet";
+import SideMenu from "../components/molecules/SideMenu";
 
 const TweetList = () => {
   const [errorMessages, setErrorMessages] = useState([]);
@@ -51,21 +52,24 @@ const TweetList = () => {
   }, [addTweet]);
 
   return (
-    <div className="flex-1 max-w-screen-sm">
-      <ErrorMessages
-        messages={errorMessages}
-        className="flex items-center justify-center"
-      />
-      <TweetForm
-        setErrorMessages={setErrorMessages}
-        onAddTweet={handleAddTweet}
-      />
-      <TweetItems
-        items={items}
-        hasMore={hasMore}
-        fetchMoreData={fetchMoreData}
-        onDeleteTweet={handleDeleteTweet}
-      />
+    <div className="flex flex-1">
+      <SideMenu />
+      <div className="flex-1 max-w-screen-sm">
+        <ErrorMessages
+          messages={errorMessages}
+          className="flex items-center justify-center"
+        />
+        <TweetForm
+          setErrorMessages={setErrorMessages}
+          onAddTweet={handleAddTweet}
+        />
+        <TweetItems
+          items={items}
+          hasMore={hasMore}
+          fetchMoreData={fetchMoreData}
+          onDeleteTweet={handleDeleteTweet}
+        />
+      </div>
     </div>
   );
 };
