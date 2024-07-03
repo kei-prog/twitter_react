@@ -23,3 +23,6 @@ export const getFavoriteUrl = (tweet_id) =>
   `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/toggle_favorite`;
 export const getFollowUrl = (user_id) =>
   `${DEFAULT_API_LOCALHOST}/users/${user_id}/follows`;
+export const NOTIFICATIONS = `${DEFAULT_API_LOCALHOST}/notifications`;
+export const getNotificationUrl = (notification_id) =>
+  `${DEFAULT_API_LOCALHOST}/notifications/${notification_id}`;
