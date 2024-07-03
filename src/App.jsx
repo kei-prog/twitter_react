@@ -7,6 +7,7 @@ import TweetDetailPage from "./routes/TweetDetailPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProfilePage from "./routes/ProfilePage";
 import { UserProvider } from "./contexts/UserContext";
+import NotificationList from "./routes/NotificationList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/top" element={<Top />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/index" element={<TweetList />} />
+          <Route path="/notifications" element={<NotificationList />} />
           <Route path="/tweet/:id" element={<TweetDetailPage />} />
           <Route path="/users/:id" element={<ProfilePage />} />
         </Route>
