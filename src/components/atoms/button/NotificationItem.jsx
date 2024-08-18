@@ -16,7 +16,7 @@ const NotificationItem = ({ item }) => {
     switch (item.notification_type) {
       case "follow":
         return `${item.send_user.name}にフォローされました`;
-      case "like":
+      case "favorite":
         return `${item.send_user.name}がツイートにいいねしました`;
       case "comment":
         return `${item.send_user.name}がツイートにコメントしました`;
@@ -43,7 +43,7 @@ const NotificationItem = ({ item }) => {
             </div>
           </div>
         </div>
-        {["like", "comment"].includes(item.notification_type) && (
+        {["favorite", "comment"].includes(item.notification_type) && (
           <div
             className="mt-2 text-left text-gray-600 break-all cursor-pointer"
             onClick={handleClick}
