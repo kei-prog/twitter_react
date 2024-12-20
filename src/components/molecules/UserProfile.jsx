@@ -34,12 +34,14 @@ const UserProfile = ({
           </button>
         </div>
         <div className="relative mb-4">
-          {userProfile.header_url && (
+          {userProfile.header_url ? (
             <img
               src={userProfile.header_url}
               alt="Header"
               className="object-cover w-full h-32"
             />
+          ) : (
+            <div className="w-full h-32 bg-gray-500" />
           )}
           {userProfile.avatar_url && (
             <div className="absolute w-24 h-24 border-4 border-none rounded-full left-4 top-16">
