@@ -10,7 +10,7 @@ const SideMenu = () => {
   };
   const handleGroup = () => {
     navigate("/group");
-  }
+  };
 
   return (
     <div className="sticky top-0 w-16 h-screen pt-4 md:w-72">
@@ -42,8 +42,10 @@ const SideMenu = () => {
           />
           <span className="hidden md:block ms-4">通知</span>
         </li>
-        <li className="flex mb-6 text-xl text-left cursor-pointer"
-          onClick={handleGroup}>
+        <li
+          className="flex mb-6 text-xl text-left cursor-pointer"
+          onClick={handleGroup}
+        >
           <img
             src="/src/assets/message.svg"
             alt="message"
