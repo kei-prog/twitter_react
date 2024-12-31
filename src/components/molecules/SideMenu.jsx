@@ -13,7 +13,7 @@ const SideMenu = () => {
   };
 
   return (
-    <div className="sticky top-0 w-16 h-screen pt-4 md:w-72">
+    <div className="sticky top-0 w-16 h-screen pt-4 lg:w-72">
       <img
         src="/src/assets/X-icon.jpg"
         alt="User"
@@ -29,7 +29,7 @@ const SideMenu = () => {
             alt="home"
             className="w-6 h-6 rounded-full"
           />
-          <span className="hidden md:block ms-4">ホーム</span>
+          <span className="hidden lg:block ms-4">ホーム</span>
         </li>
         <li
           className="flex mb-6 text-xl text-left cursor-pointer"
@@ -40,7 +40,7 @@ const SideMenu = () => {
             alt="notification"
             className="flex w-6 h-6 rounded-full"
           />
-          <span className="hidden md:block ms-4">通知</span>
+          <span className="hidden lg:block ms-4">通知</span>
         </li>
         <li
           className="flex mb-6 text-xl text-left cursor-pointer"
@@ -51,7 +51,7 @@ const SideMenu = () => {
             alt="message"
             className="flex w-6 h-6 rounded-full"
           />
-          <span className="hidden md:block ms-4">メッセージ</span>
+          <span className="hidden lg:block ms-4">メッセージ</span>
         </li>
         <li className="flex mb-6 text-xl text-left cursor-pointer">
           <img
@@ -59,7 +59,7 @@ const SideMenu = () => {
             alt="bookmark"
             className="flex w-6 h-6 rounded-full"
           />
-          <span className="hidden md:block ms-4">ブックマーク</span>
+          <span className="hidden lg:block ms-4">ブックマーク</span>
         </li>
         <li className="flex mb-6 text-xl text-left cursor-pointer">
           <img
@@ -67,7 +67,7 @@ const SideMenu = () => {
             alt="person"
             className="flex w-6 h-6 rounded-full"
           />
-          <span className="hidden md:block ms-4">退会する</span>
+          <span className="hidden lg:block ms-4">退会する</span>
         </li>
       </ul>
     </div>
