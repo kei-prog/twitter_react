@@ -4,6 +4,7 @@ import TwitterJoinDate from "../atoms/text/TwitterJoinDate";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import FollowButton from "../atoms/button/FollowButton";
+import MessageButton from "../atoms/button/MessageButton";
 
 const UserProfile = ({
   userProfile,
@@ -54,6 +55,7 @@ const UserProfile = ({
           )}
         </div>
         <div className="flex justify-end p-4">
+          <MessageButton recipientId={id} setErrorMessages={setErrorMessages} />
           {userId && userId.toString() === id ? (
             <UpdateProfileButton
               userProfile={userProfile}
