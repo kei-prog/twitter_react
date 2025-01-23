@@ -26,3 +26,6 @@ export const getFollowUrl = (user_id) =>
 export const NOTIFICATIONS = `${DEFAULT_API_LOCALHOST}/notifications`;
 export const getNotificationUrl = (notification_id) =>
   `${DEFAULT_API_LOCALHOST}/notifications/${notification_id}`;
+export const GROUPS = `${DEFAULT_API_LOCALHOST}/groups`;
+export const getMessageUrl = (group_id) =>
+  `${DEFAULT_API_LOCALHOST}/groups/${group_id}/messages`;

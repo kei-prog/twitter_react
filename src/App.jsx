@@ -8,6 +8,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import ProfilePage from "./routes/ProfilePage";
 import { UserProvider } from "./contexts/UserContext";
 import NotificationList from "./routes/NotificationList";
+import Group from "./routes/Group";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/notifications" element={<NotificationList />} />
           <Route path="/tweet/:id" element={<TweetDetailPage />} />
           <Route path="/users/:id" element={<ProfilePage />} />
+          <Route path="/group" element={<Group />} />
+          <Route path="/message" element={<Group />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Routes>

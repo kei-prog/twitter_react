@@ -93,7 +93,7 @@ const ProfilePage = () => {
       <div className="flex-1 max-w-screen-sm">
         <ErrorMessages
           messages={errorMessages}
-          className={"flex items-center justify-center"}
+          className="flex items-center justify-center"
         />
         <UserProfile
           userProfile={userProfile}

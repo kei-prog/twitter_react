@@ -131,7 +131,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
         <div className="flex">
           <div className="pt-3">
             <img
-              src={"/src/assets/comment.svg"}
+              src="/src/assets/comment.svg"
               alt="comment"
               className="w-5 h-5"
               onClick={handleCommentClick}
@@ -139,7 +139,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
           </div>
           <div className="pt-3 ps-10">
             <img
-              src={"/src/assets/retweet.svg"}
+              src="/src/assets/retweet.svg"
               alt="retweet"
               className="w-5 h-5"
               onClick={handleRetweetClick}
@@ -148,7 +148,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
           <span className="pt-3 ps-1">{retweetCount}</span>
           <div className="pt-3 ps-10">
             <img
-              src={"/src/assets/heart.svg"}
+              src="/src/assets/heart.svg"
               alt="favorite"
               className="w-5 h-5"
               onClick={handleFavoriteClick}
@@ -167,7 +167,7 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
             handleConfirmDeleteClick();
             handleDeleteClick(item);
           }}
-          message={"ポストを削除しますか？"}
+          message="ポストを削除しますか？"
         />
       )}
       {isCommentModalOpen && (
