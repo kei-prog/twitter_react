@@ -106,11 +106,8 @@ const Group = () => {
         >
           {isGroupSelected ? (
             <div className="px-4 h-full flex flex-1 flex-col">
-              <div
-                className="lg:hidden text-2xl font-bold cursor-pointer"
-                onClick={handleBackClick}
-              >
-                ←
+              <div className="lg:hidden text-2xl font-bold cursor-pointer">
+                <button onClick={handleBackClick}>←</button>
               </div>
               <MessageItems
                 messageItems={messageItems}

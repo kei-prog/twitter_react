@@ -23,7 +23,7 @@ const GroupItems = ({
         next={fetchMoreData}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        height={"90vh"}
+        height="90vh"
       >
         {items.map((item) => (
           <GroupItem

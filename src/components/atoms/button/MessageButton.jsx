@@ -19,11 +19,7 @@ const MessageButton = ({ recipientId, setErrorMessages }) => {
         className="p-2 me-2 font-bold border border-gray-700 rounded-full hover:bg-gray-800 "
         onClick={handleClick}
       >
-        <img
-          src={"/src/assets/message.svg"}
-          alt="Message"
-          className="w-5 h-5"
-        />
+        <img src="/src/assets/message.svg" alt="Message" className="w-5 h-5" />
       </button>
     </>
   );

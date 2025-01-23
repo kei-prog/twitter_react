@@ -13,7 +13,7 @@ const GroupItem = ({ item, selectGroup, isSelected }) => {
         {item?.sender?.avatar_url ? (
           <img
             src={item.sender.avatar_url}
-            alt={"avatar"}
+            alt="avatar"
             className="rounded-full w-full h-full object-cover"
           />
         ) : (
@@ -24,9 +24,7 @@ const GroupItem = ({ item, selectGroup, isSelected }) => {
         <div className="truncate">
           <span>{item.sender.name}</span>
         </div>
-        <div className="truncate">
-          {item.latest_message ? item.latest_message.content : ""}
-        </div>
+        <div className="truncate">{item.latest_message?.content ?? ""}</div>
       </div>
     </div>
   );

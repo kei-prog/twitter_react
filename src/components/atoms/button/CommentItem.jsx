@@ -80,7 +80,7 @@ const CommentItem = ({ item, handleDeleteClick }) => {
                 handleConfirmDeleteClick();
                 handleDeleteClick(item);
               }}
-              message={"コメントを削除しますか？"}
+              message="コメントを削除しますか？"
             />
           )}
         </div>
