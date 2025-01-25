@@ -4,7 +4,13 @@ import ErrorMessages from "../atoms/message/ErrorMessages";
 import { useState } from "react";
 import { deleteTweet } from "../../apis/tweet";
 
-const TweetItems = ({ items, hasMore, fetchMoreData, onDeleteTweet }) => {
+const TweetItems = ({
+  items,
+  hasMore,
+  fetchMoreData,
+  onDeleteTweet,
+  onUnBookmark,
+}) => {
   const [errorMessages, setErrorMessages] = useState([]);
 
   const handleDeleteClick = async (item) => {
@@ -31,6 +37,7 @@ const TweetItems = ({ items, hasMore, fetchMoreData, onDeleteTweet }) => {
             item={item}
             handleDeleteClick={handleDeleteClick}
             setErrorMessages={setErrorMessages}
+            onUnBookmark={onUnBookmark}
           />
         ))}
       </InfiniteScroll>

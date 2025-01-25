@@ -9,6 +9,7 @@ import ProfilePage from "./routes/ProfilePage";
 import { UserProvider } from "./contexts/UserContext";
 import NotificationList from "./routes/NotificationList";
 import Group from "./routes/Group";
+import Bookmark from "./routes/Bookmark";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/users/:id" element={<ProfilePage />} />
           <Route path="/group" element={<Group />} />
           <Route path="/message" element={<Group />} />
+          <Route path="/bookmark" element={<Bookmark />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Routes>

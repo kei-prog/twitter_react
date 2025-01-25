@@ -8,14 +8,22 @@ import ConfirmationModal from "../field/ConfirmationModal";
 import CommentModal from "../../organisms/CommentModal";
 import { postRetweet } from "../../../apis/retweet";
 import { postFavorite } from "../../../apis/favorite";
+import { postBookmark } from "../../../apis/bookmark";
+import BookmarkIcon from "/src/assets/bookmark.svg?react";
 
-const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
+const TweetItem = ({
+  item,
+  handleDeleteClick,
+  setErrorMessages,
+  onUnBookmark,
+}) => {
   const navigate = useNavigate();
   const [dropDownDisabled, setDropDownDisabled] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState(false);
   const { userId } = useContext(UserContext);
   const [retweetCount, setRetweetCount] = useState(item.retweet_count);
   const [favoriteCount, setFavoriteCount] = useState(item.favorite_count);
+  const [isBookmarked, setIsBookmarked] = useState(item.bookmarked);
 
   useEffect(() => {
     if (dropDownDisabled) {
@@ -93,6 +101,21 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
     }
   };
 
+  const handleBookmarkClick = async (e) => {
+    e.stopPropagation();
+    try {
+      const bookmarkResponse = await postBookmark(item.id);
+      if (bookmarkResponse.success) {
+        onUnBookmark?.(item.id);
+        setIsBookmarked(!isBookmarked);
+      } else {
+        setErrorMessages(bookmarkResponse.errors);
+      }
+    } catch (error) {
+      setErrorMessages(["ブックマークに失敗しました。"]);
+    }
+  };
+
   return (
     <div key={item.id} className="p-4 border border-gray-800">
       <div className="cursor-pointer" onClick={handleClick}>
@@ -155,6 +178,18 @@ const TweetItem = ({ item, handleDeleteClick, setErrorMessages }) => {
             />
           </div>
           <span className="pt-3 ps-1">{favoriteCount}</span>
+
+          <div className="pt-3 ps-10 ml-auto">
+            <button
+              className="focus:outline-none"
+              aria-label="ブックマークボタン"
+              onClick={handleBookmarkClick}
+            >
+              <BookmarkIcon
+                className={`w-5 h-5 ${isBookmarked && "fill-blue-700"}`}
+              />
+            </button>
+          </div>
         </div>
       </div>
       {item.images && item.images.length > 0 && (
