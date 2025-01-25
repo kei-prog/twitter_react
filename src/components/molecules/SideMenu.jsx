@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { postUserDelete } from "../../apis/users";
+import { useState } from "react";
+import ErrorMessages from "../atoms/message/ErrorMessages";
+import ConfirmationModal from "../atoms/field/ConfirmationModal";
 
 const SideMenu = () => {
+  const [confirmationMessage, setConfirmationMessage] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
   const navigate = useNavigate();
   const handleHome = () => {
     navigate("/index");
@@ -13,6 +19,23 @@ const SideMenu = () => {
   };
   const handleBookmark = () => {
     navigate("/bookmark");
+  };
+
+  const handleAccountDelete = async () => {
+    const response = await postUserDelete();
+    if (response.success) {
+      navigate("/");
+    } else {
+      setErrorMessages(response.errors);
+    }
+  };
+
+  const closeConfirmationMessage = () => {
+    setConfirmationMessage(false);
+  };
+
+  const toggleConfirmationMessage = () => {
+    setConfirmationMessage(!confirmationMessage);
   };
 
   return (
@@ -89,14 +112,32 @@ const SideMenu = () => {
           </button>
         </li>
         <li className="flex mb-6 text-xl text-left cursor-pointer">
-          <img
-            src="/src/assets/person.svg"
-            alt="person"
-            className="flex w-6 h-6 rounded-full"
-          />
-          <span className="hidden lg:block ms-4">退会する</span>
+          <button
+            className="flex focus:outline-none"
+            onClick={toggleConfirmationMessage}
+            aria-label="退会ボタン"
+          >
+            <img
+              src="/src/assets/person.svg"
+              alt="person"
+              className="flex w-6 h-6 rounded-full"
+            />
+            <span className="hidden lg:block ms-4">退会する</span>
+          </button>
         </li>
       </ul>
+      {confirmationMessage && (
+        <ConfirmationModal
+          onClose={closeConfirmationMessage}
+          onConfirm={() => {
+            toggleConfirmationMessage();
+            handleAccountDelete();
+          }}
+          message="退会しますか？"
+          deleteText="退会"
+        />
+      )}
+      <ErrorMessages messages={errorMessages} />
     </div>
   );
 };

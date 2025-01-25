@@ -21,6 +21,17 @@ export const postUserRegistration = async (userData) => {
   }
 };
 
+export const postUserDelete = async () => {
+  try {
+    const response = await axiosInstance.delete(USERS_REGISTRATIONS);
+    return {
+      success: true,
+    };
+  } catch (e) {
+    return handleErrorResponse(e, "エラーが発生しました。");
+  }
+};
+
 export const postUserSignIn = async (userData) => {
   try {
     await axios.post(USERS_SESSIONS, userData, {

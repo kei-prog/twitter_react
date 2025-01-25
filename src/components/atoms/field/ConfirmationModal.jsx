@@ -1,4 +1,9 @@
-const ConfirmationModal = ({ onClose, onConfirm, message }) => (
+const ConfirmationModal = ({
+  onClose,
+  onConfirm,
+  message,
+  deleteText = "削除",
+}) => (
   <div
     onClick={onClose}
     className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500/50"
@@ -13,7 +18,7 @@ const ConfirmationModal = ({ onClose, onConfirm, message }) => (
           className="px-4 py-2 mr-2 text-white bg-red-700 rounded-full"
           onClick={onConfirm}
         >
-          削除
+          {deleteText}
         </button>
         <button
           onClick={onClose}
