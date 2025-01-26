@@ -29,3 +29,6 @@ export const getNotificationUrl = (notification_id) =>
 export const GROUPS = `${DEFAULT_API_LOCALHOST}/groups`;
 export const getMessageUrl = (group_id) =>
   `${DEFAULT_API_LOCALHOST}/groups/${group_id}/messages`;
+export const BOOKMARKS = `${DEFAULT_API_LOCALHOST}/bookmarks`;
+export const getBookmarkUrl = (tweet_id) =>
+  `${DEFAULT_API_LOCALHOST}/tweets/${tweet_id}/toggle_bookmark`;
